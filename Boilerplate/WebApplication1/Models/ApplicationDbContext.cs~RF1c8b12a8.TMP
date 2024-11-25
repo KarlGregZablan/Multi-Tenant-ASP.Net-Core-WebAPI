@@ -1,0 +1,20 @@
+﻿using BoilerplateAPI.Modules.Product;
+using BoilerplateAPI.Modules.Tenant;
+using Microsoft.EntityFrameworkCore;
+
+namespace BoilerplateAPI.Models
+{
+  public class ApplicationDbContext : DbContext
+  {
+    private readonly ICurrentTenantService _currentTenantService;
+    public int MyProperty { get; set; }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
+  ICurrentTenantService currentTenantService)
+  : base(options)
+    {
+      _currentTenantService = currentTenantService;
+    }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
+  }
+}
